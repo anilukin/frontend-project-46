@@ -1,11 +1,5 @@
-import process from 'process';
-import path from 'path';
 import fs from 'fs';
-
-const absPath = (filepath) => {
-  const workDir = process.cwd();
-  return path.resolve(workDir, filepath);
-};
+import parse, { absPath } from './parsers.js';
 
 const getDiff = (obj1, obj2) => {
   const keys1 = Object.keys(obj1);
@@ -101,8 +95,8 @@ const genDiff = (filepath1, filepath2) => {
     result = console.log('Error! Check file 2!');
     return result;
   }
-  const obj1 = JSON.parse(fs.readFileSync(absPath1));
-  const obj2 = JSON.parse(fs.readFileSync(absPath2));
+  const obj1 = parse(filepath1);
+  const obj2 = parse(filepath2);
   const diff = getDiff(obj1, obj2);
   result = printDiffObj(diff);
   return result;
