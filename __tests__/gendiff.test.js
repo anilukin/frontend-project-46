@@ -41,19 +41,3 @@ test('genDiff yml', () => {
 
   expect(diff).toEqual(expected);
 });
-
-test('mistake in path of file 1', () => {
-  const filepath1 = 'file.json';
-  const filepath2 = getFixturePath('file2.json');
-  const diff = genDiff(filepath1, filepath2);
-  const expected = console.log('Error! Check file 1!');
-  expect(diff).toEqual(expected);
-});
-
-test('mistake in path of file 2', () => {
-  const filepath1 = getFixturePath('file1.json');
-  const filepath2 = 'file.json';
-  const diff = genDiff(filepath1, filepath2);
-  const expected = console.log('Error! Check file 2!');
-  expect(diff).toEqual(expected);
-});

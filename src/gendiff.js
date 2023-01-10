@@ -1,5 +1,4 @@
-import fs from 'fs';
-import parse, { absPath } from './parsers.js';
+import parse from './parsers.js';
 
 const getDiff = (obj1, obj2) => {
   const keys1 = Object.keys(obj1);
@@ -84,22 +83,10 @@ const printDiffObj = (diff) => {
 };
 
 const genDiff = (filepath1, filepath2) => {
-  const absPath1 = absPath(filepath1);
-  const absPath2 = absPath(filepath2);
-  let result;
-  if (!fs.existsSync(absPath1)) {
-    result = console.log('Error! Check file 1!');
-    return result;
-  }
-  if (!fs.existsSync(absPath2)) {
-    result = console.log('Error! Check file 2!');
-    return result;
-  }
   const obj1 = parse(filepath1);
   const obj2 = parse(filepath2);
   const diff = getDiff(obj1, obj2);
-  result = printDiffObj(diff);
-  return result;
+  return printDiffObj(diff);
 };
 
 export default genDiff;

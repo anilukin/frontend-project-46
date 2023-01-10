@@ -19,15 +19,15 @@ const parse = (filepath) => {
     }
     case 'yaml':
     case 'yml': {
-      obj = yaml.load(fs.readFileSync(absPathFile, 'utf8'));
+      obj = yaml.load(fs.readFileSync(absPathFile));
       break;
     }
     default: {
-      obj = console.log(`Unknown extension: ${extension}`);
+      throw new Error(`Unknown extension: '${extension}'`);
     }
   }
   return obj;
 };
 
-export default parse;
 export { absPath };
+export default parse;
