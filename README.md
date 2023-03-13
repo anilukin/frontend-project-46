@@ -10,6 +10,10 @@
 - Генерация отчета в виде plain text, stylish и json
 
 ## Примеры использования:
-### *1. Сравнение плоских файлов (JSON)*
+### *1.1 Сравнение плоских файлов (JSON, yaml, yml)*
 Диф строится на основе того, как файлы изменились относительно друг друга, ключи выводятся в алфавитном порядке.
 [![asciicast](https://asciinema.org/a/ez6I1SLpOrFKWcq6w0Rnd7FuO.svg)](https://asciinema.org/a/ez6I1SLpOrFKWcq6w0Rnd7FuO)
+
+### *1.2. Сравнение файлов, имеющих вложенную структуру*
+Диф также строится на основе того, как файлы изменились относительно друг друга, ключи выводятся в алфавитном порядке.
+[![asciicast](https://asciinema.org/a/039v7KuV5xlBOOcp7g71D9E2P.svg)](https://asciinema.org/a/039v7KuV5xlBOOcp7g71D9E2P)
