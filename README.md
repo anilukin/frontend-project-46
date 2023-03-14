@@ -12,8 +12,8 @@
 ## Примеры использования:
 ### *1.1 Сравнение плоских файлов (JSON, yaml, yml)*
 Диф строится на основе того, как файлы изменились относительно друг друга, ключи выводятся в алфавитном порядке.
-[![asciicast](https://asciinema.org/a/ez6I1SLpOrFKWcq6w0Rnd7FuO.svg)](https://asciinema.org/a/ez6I1SLpOrFKWcq6w0Rnd7FuO)
+[![asciicast](https://asciinema.org/a/wI65ZterMpgnuK27doVyQDpXM.svg)](https://asciinema.org/a/wI65ZterMpgnuK27doVyQDpXM)
 
-### *1.2. Сравнение файлов, имеющих вложенную структуру*
+### *1.2 Сравнение файлов, имеющих вложенную структуру*
 Диф также строится на основе того, как файлы изменились относительно друг друга, ключи выводятся в алфавитном порядке.
 [![asciicast](https://asciinema.org/a/039v7KuV5xlBOOcp7g71D9E2P.svg)](https://asciinema.org/a/039v7KuV5xlBOOcp7g71D9E2P)
