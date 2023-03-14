@@ -1,5 +1,6 @@
 import parse from './parsers.js';
-import stringify, { isObject } from './stylish.js';
+import printDiff from './formatters/index.js';
+import { isObject } from './formatters/stylish.js';
 
 const getDiff = (obj1, obj2) => {
   const keys1 = Object.keys(obj1);
@@ -46,11 +47,11 @@ const getDiff = (obj1, obj2) => {
   return result;
 };
 
-const genDiff = (filepath1, filepath2, format = 'stylish') => {
+const genDiff = (filepath1, filepath2, formatName = 'stylish') => {
   const obj1 = parse(filepath1);
   const obj2 = parse(filepath2);
   const diff = getDiff(obj1, obj2);
-  return stringify(diff);
+  return printDiff(diff, formatName);
 };
 
 export default genDiff;

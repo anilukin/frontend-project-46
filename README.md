@@ -17,3 +17,7 @@
 ### *1.2 Сравнение файлов, имеющих вложенную структуру*
 Диф также строится на основе того, как файлы изменились относительно друг друга, ключи выводятся в алфавитном порядке.
 [![asciicast](https://asciinema.org/a/039v7KuV5xlBOOcp7g71D9E2P.svg)](https://asciinema.org/a/039v7KuV5xlBOOcp7g71D9E2P)
+
+### *2 Вывод отчета в формате plain*
+Возможность заменить формат вывода отчета (по умолчанию формат stylish) на формат plain.
+[![asciicast](https://asciinema.org/a/CiMm7s7LUNpnlYeVTaqPMGP01.svg)](https://asciinema.org/a/CiMm7s7LUNpnlYeVTaqPMGP01)
