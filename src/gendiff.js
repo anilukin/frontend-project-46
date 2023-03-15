@@ -13,6 +13,7 @@ const getDiff = (obj1, obj2) => {
         type: 'deleted',
         oldValue: obj1[key],
       };
+      // eslint-disable-next-line no-continue
       continue;
     }
     if (obj1[key] === obj2[key]) {
@@ -55,4 +56,3 @@ const genDiff = (filepath1, filepath2, formatName = 'stylish') => {
 };
 
 export default genDiff;
-export { isObject };

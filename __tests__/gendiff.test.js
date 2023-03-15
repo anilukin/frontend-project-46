@@ -13,10 +13,22 @@ const combinations = [
   ['file1.json', 'file2.json', undefined, 'result-stylish.txt'],
   ['file1.yaml', 'file2.yaml', undefined, 'result-stylish.txt'],
   ['file1.yml', 'file2.yml', undefined, 'result-stylish.txt'],
+  ['file1.json', 'file2.yaml', undefined, 'result-stylish.txt'],
+
+  ['file1.json', 'file2.json', 'stylish', 'result-stylish.txt'],
   ['file1.yaml', 'file2.yaml', 'stylish', 'result-stylish.txt'],
-  ['file1.yml', 'file2.json', 'stylish', 'result-stylish.txt'],
+  ['file1.yml', 'file2.yml', 'stylish', 'result-stylish.txt'],
+  ['file1.json', 'file2.yml', 'stylish', 'result-stylish.txt'],
+
+  ['file1.json', 'file2.json', 'plain', 'result-plain.txt'],
+  ['file1.yaml', 'file2.yaml', 'plain', 'result-plain.txt'],
   ['file1.yml', 'file2.yml', 'plain', 'result-plain.txt'],
-  ['file1.json', 'file2.yaml', 'plain', 'result-plain.txt'],
+  ['file1.yaml', 'file2.json', 'plain', 'result-plain.txt'],
+
+  ['file1.json', 'file2.json', 'json', 'result-json.json'],
+  ['file1.yaml', 'file2.yaml', 'json', 'result-json.json'],
+  ['file1.yml', 'file2.yml', 'json', 'result-json.json'],
+  ['file1.yaml', 'file2.yml', 'json', 'result-json.json'],
 ];
 
 test.each(combinations)('genDiff extensions and format', (file1, file2, format, expected) => {
