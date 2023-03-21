@@ -11,22 +11,18 @@ const absPath = (filepath) => {
 const parse = (filepath) => {
   const [, extension] = filepath.split('.');
   const absPathFile = absPath(filepath);
-  let obj;
   switch (extension) {
     case 'json': {
-      obj = JSON.parse(fs.readFileSync(absPathFile));
-      break;
+      return JSON.parse(fs.readFileSync(absPathFile));
     }
     case 'yaml':
     case 'yml': {
-      obj = yaml.load(fs.readFileSync(absPathFile));
-      break;
+      return yaml.load(fs.readFileSync(absPathFile));
     }
     default: {
       throw new Error(`Unknown extension: '${extension}'`);
     }
   }
-  return obj;
 };
 
 export { absPath };
