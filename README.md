@@ -2,6 +2,7 @@
 [![Actions Status](https://github.com/anilukin/frontend-project-46/workflows/hexlet-check/badge.svg)](https://github.com/anilukin/frontend-project-46/actions)
 [![Maintainability](https://api.codeclimate.com/v1/badges/7c5c42a2ff4a864e0d13/maintainability)](https://codeclimate.com/github/anilukin/frontend-project-46/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/7c5c42a2ff4a864e0d13/test_coverage)](https://codeclimate.com/github/anilukin/frontend-project-46/test_coverage)
+[![Node CI](https://github.com/anilukin/frontend-project-46/actions/workflows/nodejs.yml/badge.svg)](https://github.com/anilukin/frontend-project-46/actions/workflows/nodejs.yml)
 # Вычислитель отличий
 Вычислитель отличий – программа, определяющая разницу между двумя структурами данных.
 
