@@ -1,8 +1,6 @@
-import parse from './parsers.js';
-import printDiff from './formatters/index.js';
 import { isObject } from './formatters/stylish.js';
 
-const getDiff = (obj1, obj2) => {
+const buildTree = (obj1, obj2) => {
   const keys1 = Object.keys(obj1);
   const keys2 = Object.keys(obj2);
   const result = {};
@@ -26,7 +24,7 @@ const getDiff = (obj1, obj2) => {
       result[key] = {
         type: 'unchanged',
         valueType: 'complex',
-        value: getDiff(obj1[key], obj2[key]),
+        value: buildTree(obj1[key], obj2[key]),
       };
     } else {
       result[key] = {
@@ -47,12 +45,4 @@ const getDiff = (obj1, obj2) => {
   }
   return result;
 };
-
-const genDiff = (filepath1, filepath2, formatName = 'stylish') => {
-  const obj1 = parse(filepath1);
-  const obj2 = parse(filepath2);
-  const diff = getDiff(obj1, obj2);
-  return printDiff(diff, formatName);
-};
-
-export default genDiff;
+export default buildTree;

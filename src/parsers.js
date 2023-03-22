@@ -1,29 +1,18 @@
-import fs from 'fs';
-import process from 'process';
-import path from 'path';
 import yaml from 'js-yaml';
 
-const absPath = (filepath) => {
-  const workDir = process.cwd();
-  return path.resolve(workDir, filepath);
-};
-
-const parse = (filepath) => {
-  const [, extension] = filepath.split('.');
-  const absPathFile = absPath(filepath);
-  switch (extension) {
+const parse = (data, dataType) => {
+  switch (dataType) {
     case 'json': {
-      return JSON.parse(fs.readFileSync(absPathFile));
+      return JSON.parse(data);
     }
     case 'yaml':
     case 'yml': {
-      return yaml.load(fs.readFileSync(absPathFile));
+      return yaml.load(data);
     }
     default: {
-      throw new Error(`Unknown extension: '${extension}'`);
+      throw new Error(`Unknown extension: '${dataType}'`);
     }
   }
 };
 
-export { absPath };
 export default parse;

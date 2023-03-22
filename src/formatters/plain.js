@@ -1,15 +1,16 @@
 import { isObject } from './stylish.js';
 
+const printValue = (val) => {
+  if (isObject(val)) {
+    return '[complex value]';
+  }
+  if (typeof val === 'string') {
+    return `'${val}'`;
+  }
+  return String(val);
+};
+
 export default (value) => {
-  const printValue = (val) => {
-    if (isObject(val)) {
-      return '[complex value]';
-    }
-    if (typeof val === 'string') {
-      return `'${val}'`;
-    }
-    return val;
-  };
   const printInner = (data, prefix) => {
     const printKey = (k) => [...prefix, k].join('.');
     const keys = Object.keys(data).sort();
