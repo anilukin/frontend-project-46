@@ -3,46 +3,44 @@ import { isObject } from './formatters/stylish.js';
 const buildTree = (obj1, obj2) => {
   const keys1 = Object.keys(obj1);
   const keys2 = Object.keys(obj2);
-  const result = {};
+  const allKeys = [...new Set([...keys1, ...keys2])];
 
-  for (const key of keys1) {
-    if (!Object.hasOwn(obj2, key)) {
-      result[key] = {
+  const result = allKeys.reduce((acc, key) => {
+    if (Object.hasOwn(obj1, key) && !Object.hasOwn(obj2, key)) {
+      acc[key] = {
         type: 'deleted',
         oldValue: obj1[key],
       };
-      // eslint-disable-next-line no-continue
-      continue;
     }
-    if (obj1[key] === obj2[key]) {
-      result[key] = {
-        type: 'unchanged',
-        valueType: 'simple',
-        value: obj1[key],
-      };
-    } else if (isObject(obj1[key]) && isObject(obj2[key])) {
-      result[key] = {
-        type: 'unchanged',
-        valueType: 'complex',
-        value: buildTree(obj1[key], obj2[key]),
-      };
-    } else {
-      result[key] = {
-        type: 'changed',
-        oldValue: obj1[key],
-        newValue: obj2[key],
-      };
-    }
-  }
-
-  for (const key of keys2) {
-    if (!Object.hasOwn(obj1, key)) {
-      result[key] = {
+    if (!Object.hasOwn(obj1, key) && Object.hasOwn(obj2, key)) {
+      acc[key] = {
         type: 'added',
         value: obj2[key],
       };
     }
-  }
+    if (Object.hasOwn(obj1, key) && Object.hasOwn(obj2, key)) {
+      if (obj1[key] === obj2[key]) {
+        acc[key] = {
+          type: 'unchanged',
+          valueType: 'simple',
+          value: obj1[key],
+        };
+      } else if (isObject(obj1[key]) && isObject(obj2[key])) {
+        acc[key] = {
+          type: 'unchanged',
+          valueType: 'complex',
+          value: buildTree(obj1[key], obj2[key]),
+        };
+      } else {
+        acc[key] = {
+          type: 'changed',
+          oldValue: obj1[key],
+          newValue: obj2[key],
+        };
+      }
+    }
+    return acc;
+  }, {});
   return result;
 };
 export default buildTree;
