@@ -6,40 +6,41 @@ const buildTree = (obj1, obj2) => {
   const allKeys = [...new Set([...keys1, ...keys2])];
 
   const result = allKeys.reduce((acc, key) => {
+    const newAcc = acc;
     if (Object.hasOwn(obj1, key) && !Object.hasOwn(obj2, key)) {
-      acc[key] = {
+      newAcc[key] = {
         type: 'deleted',
         oldValue: obj1[key],
       };
     }
     if (!Object.hasOwn(obj1, key) && Object.hasOwn(obj2, key)) {
-      acc[key] = {
+      newAcc[key] = {
         type: 'added',
         value: obj2[key],
       };
     }
     if (Object.hasOwn(obj1, key) && Object.hasOwn(obj2, key)) {
       if (obj1[key] === obj2[key]) {
-        acc[key] = {
+        newAcc[key] = {
           type: 'unchanged',
           valueType: 'simple',
           value: obj1[key],
         };
       } else if (isObject(obj1[key]) && isObject(obj2[key])) {
-        acc[key] = {
+        newAcc[key] = {
           type: 'unchanged',
           valueType: 'complex',
           value: buildTree(obj1[key], obj2[key]),
         };
       } else {
-        acc[key] = {
+        newAcc[key] = {
           type: 'changed',
           oldValue: obj1[key],
           newValue: obj2[key],
         };
       }
     }
-    return acc;
+    return newAcc;
   }, {});
   return result;
 };
