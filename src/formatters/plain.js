@@ -14,7 +14,7 @@ export default (value) => {
   const printInner = (data, prefix) => {
     const printKey = (k) => [...prefix, k].join('.');
     const keys = Object.keys(data).sort();
-    const result = keys
+    const result = [...keys]
       .map((key) => {
         const item = data[key];
         if (item.type === 'unchanged' && item.valueType === 'complex') {

@@ -6,7 +6,7 @@ const buildTree = (obj1, obj2) => {
   const allKeys = [...new Set([...keys1, ...keys2])];
 
   const result = allKeys.reduce((acc, key) => {
-    const newAcc = acc;
+    const newAcc = { ...acc };
     if (Object.hasOwn(obj1, key) && !Object.hasOwn(obj2, key)) {
       newAcc[key] = {
         type: 'deleted',
