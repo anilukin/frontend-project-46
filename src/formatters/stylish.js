@@ -20,26 +20,30 @@ export default (value) => {
     return ['{', ...result, `${replacer.repeat(spacesCount * (depth - 1))}}`].join('\n');
   };
 
-  const printInner = (data, depth) => {
+  const printInner2 = (data, depth) => {
     const getPrefix = replacer.repeat(spacesCount * depth - 2);
-    const keys = Object.keys(data);
-    const result = keys.reduce((acc, key) => {
-      const item = data[key];
+    const result = ['{'];
+    data.forEach((item) => {
       if (item.type === 'added') {
-        return [...acc, `${getPrefix}+ ${key}: ${stringify(item.value, depth + 1)}`];
+        result.push(`${getPrefix}+ ${item.key}: ${stringify(item.value, depth + 1)}`);
       }
       if (item.type === 'deleted') {
-        return [...acc, `${getPrefix}- ${key}: ${stringify(item.oldValue, depth + 1)}`];
+        result.push(`${getPrefix}- ${item.key}: ${stringify(item.oldValue, depth + 1)}`);
       }
       if (item.type === 'unchanged') {
         if (item.valueType === 'simple') {
-          return [...acc, `${getPrefix}  ${key}: ${stringify(item.value, depth + 1)}`];
+          result.push(`${getPrefix}  ${item.key}: ${stringify(item.value, depth + 1)}`);
+        } else {
+          result.push(`${getPrefix}  ${item.key}: ${printInner2(item.value, depth + 1)}`);
         }
-        return [...acc, `${getPrefix}  ${key}: ${printInner(item.value, depth + 1)}`];
       }
-      return [...acc, `${getPrefix}- ${key}: ${stringify(item.oldValue, depth + 1)}`, `${getPrefix}+ ${key}: ${stringify(item.newValue, depth + 1)}`];
-    }, ['{']);
-    return [...result, `${replacer.repeat(spacesCount * (depth - 1))}}`].join('\n');
+      if (item.type === 'changed') {
+        result.push(`${getPrefix}- ${item.key}: ${stringify(item.oldValue, depth + 1)}`);
+        result.push(`${getPrefix}+ ${item.key}: ${stringify(item.newValue, depth + 1)}`);
+      }
+    });
+    result.push(`${replacer.repeat(spacesCount * (depth - 1))}}`);
+    return result.join('\n');
   };
-  return printInner(value, 1);
+  return printInner2(value, 1);
 };

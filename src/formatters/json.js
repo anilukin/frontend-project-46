@@ -1,1 +1,1 @@
-export default (value) => JSON.stringify(value, null, 2);
+export default (value) => JSON.stringify({ diffArr: value }, null, 2);

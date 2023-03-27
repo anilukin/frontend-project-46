@@ -13,21 +13,19 @@ const printValue = (val) => {
 export default (value) => {
   const printInner = (data, prefix) => {
     const printKey = (k) => [...prefix, k].join('.');
-    const keys = Object.keys(data);
-    const result = [...keys]
-      .map((key) => {
-        const item = data[key];
+    const result = data
+      .map((item) => {
         if (item.type === 'unchanged' && item.valueType === 'complex') {
-          return printInner(item.value, [...prefix, key]);
+          return printInner(item.value, [...prefix, item.key]);
         }
         if (item.type === 'added') {
-          return `Property '${printKey(key)}' was added with value: ${printValue(item.value)}`;
+          return `Property '${printKey(item.key)}' was added with value: ${printValue(item.value)}`;
         }
         if (item.type === 'deleted') {
-          return `Property '${printKey(key)}' was removed`;
+          return `Property '${printKey(item.key)}' was removed`;
         }
         if (item.type === 'changed') {
-          return `Property '${printKey(key)}' was updated. From ${printValue(item.oldValue)} to ${printValue(item.newValue)}`;
+          return `Property '${printKey(item.key)}' was updated. From ${printValue(item.oldValue)} to ${printValue(item.newValue)}`;
         }
         return null;
       })
