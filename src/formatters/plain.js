@@ -12,20 +12,20 @@ const printValue = (val) => {
 
 export default (value) => {
   const printInner = (data, prefix) => {
-    const printKey = (k) => [...prefix, k].join('.');
+    const printPath = (k) => [...prefix, k].join('.');
     const result = data
       .map((item) => {
         if (item.type === 'unchanged' && item.valueType === 'complex') {
           return printInner(item.value, [...prefix, item.key]);
         }
         if (item.type === 'added') {
-          return `Property '${printKey(item.key)}' was added with value: ${printValue(item.value)}`;
+          return `Property '${printPath(item.key)}' was added with value: ${printValue(item.value)}`;
         }
         if (item.type === 'deleted') {
-          return `Property '${printKey(item.key)}' was removed`;
+          return `Property '${printPath(item.key)}' was removed`;
         }
         if (item.type === 'changed') {
-          return `Property '${printKey(item.key)}' was updated. From ${printValue(item.oldValue)} to ${printValue(item.newValue)}`;
+          return `Property '${printPath(item.key)}' was updated. From ${printValue(item.oldValue)} to ${printValue(item.newValue)}`;
         }
         return null;
       })
