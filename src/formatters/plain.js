@@ -1,7 +1,7 @@
-import { isObject } from './stylish.js';
+import _ from 'lodash';
 
 const printValue = (val) => {
-  if (isObject(val)) {
+  if (_.isObject(val)) {
     return '[complex value]';
   }
   if (typeof val === 'string') {
@@ -13,7 +13,7 @@ const printValue = (val) => {
 export default (value) => {
   const printInner = (data, prefix) => {
     const printKey = (k) => [...prefix, k].join('.');
-    const keys = Object.keys(data).sort();
+    const keys = Object.keys(data);
     const result = [...keys]
       .map((key) => {
         const item = data[key];

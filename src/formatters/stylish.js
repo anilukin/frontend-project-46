@@ -1,17 +1,18 @@
-const isObject = (data) => (typeof data === 'object' && data !== null);
+import _ from 'lodash';
+
 const replacer = ' ';
 const spacesCount = 4;
 export default (value) => {
   const stringify = (data, depth) => {
-    if (!isObject(data)) {
+    if (!_.isObject(data)) {
       return `${data}`;
     }
-    const keys = Object.keys(data).sort();
+    const keys = Object.keys(data);
     const getPrefix = replacer.repeat(spacesCount * depth);
 
-    const result = [...keys].map((key) => {
+    const result = keys.map((key) => {
       const item = data[key];
-      if (!isObject(item)) {
+      if (!_.isObject(item)) {
         return `${getPrefix}${key}: ${item}`;
       }
       return `${getPrefix}${key}: ${stringify(item, depth + 1)}`;
@@ -21,8 +22,8 @@ export default (value) => {
 
   const printInner = (data, depth) => {
     const getPrefix = replacer.repeat(spacesCount * depth - 2);
-    const keys = Object.keys(data).sort();
-    const result = [...keys].reduce((acc, key) => {
+    const keys = Object.keys(data);
+    const result = keys.reduce((acc, key) => {
       const item = data[key];
       if (item.type === 'added') {
         return [...acc, `${getPrefix}+ ${key}: ${stringify(item.value, depth + 1)}`];
@@ -42,4 +43,3 @@ export default (value) => {
   };
   return printInner(value, 1);
 };
-export { isObject };
